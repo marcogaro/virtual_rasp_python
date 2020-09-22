@@ -31,7 +31,7 @@ lxd --version
 
 sudo ldconfig
 
-
+#toglie il commento a user_allow_other
 sub=user_allow_other; 
 sudo sed -i "/^#$sub/ c$sub" /usr/local/etc/fuse.conf
 
