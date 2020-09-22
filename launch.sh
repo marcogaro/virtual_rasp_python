@@ -24,7 +24,7 @@ else
 	exit;
 fi
    
-pass="examplenuovo.py"
+pass="example.py"
 
 
 lxc list  -c n | grep -w $nome
