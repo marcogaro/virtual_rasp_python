@@ -31,6 +31,11 @@ lxd --version
 
 sudo ldconfig
 
+
+sub=user_allow_other; 
+sudo sed -i "/^#$sub/ c$sub" /usr/local/etc/fuse.conf
+
+
 sudo addgroup gpio
 sudo usermod -a -G gpio ubuntu
 
