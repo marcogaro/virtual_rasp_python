@@ -6,7 +6,6 @@ if [ "$#" -eq 1 ] ; then
 elif [ "$#" -eq 0 ] ; then
 	echo "virtual rasp name? "
 	read -r b
-	#echo $b
 	nome=$b ;	
 else
    	echo "error" 
