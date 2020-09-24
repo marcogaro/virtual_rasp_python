@@ -572,6 +572,9 @@ class Operations(pyfuse3.Operations):
         os.lseek(fd, offset, os.SEEK_SET)
         return os.read(fd, length)
 
+##########################################################################################
+
+
     async def write(self, fd, offset, buf):
         # ff=gpioint
         # f=gpio
@@ -774,13 +777,11 @@ class Operations(pyfuse3.Operations):
                 else:
                     print("\n-bash: echo: write error: Invalid argument")
                     if __debug__:
-                        # print('Debug OFF')
                         pass
                     else:
-                        print('Debug ON')
-                        print("errore1")
+                        print("errore carattere")
 
-                    # os.system('echo in > /gpio_mnt/test1/sys/class/gpio/gpio1/direction')
+
                     proc = subprocess.Popen(
                         'echo ' + valoredirezioneprima + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/direction',
                         shell=True, stdout=subprocess.PIPE)
@@ -788,58 +789,33 @@ class Operations(pyfuse3.Operations):
                     os.lseek(fd, offset, os.SEEK_SET)
                     return 1
 
-                    '''
-                    pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                    basename = os.path.basename(last_path[0])
-                    basename = '/' + basename
-                    print("\n\n\npathmod:", pathmod, "basename:", basename, "\n\n\n")
-                    gpio = os.path.dirname(pathmod)
-                    print("gpio:", gpio)
 
-                    valoredirezione = os.popen('cat /sys/class/gpio/' + gpio + '/direction').read()
-                    valoredirezione = valoredirezione.strip('\n')
-                    '''
 
-                    # print("valore direzione: ", valoredirezione)
-                    # print('echo '+valoredirezione+' > /gpio_mnt/test2/sys/class/gpio/'+gpio+'/direction')
-                    # cmd = 'echo '+valoredirezione+' > /gpio_mnt/test2/sys/class/gpio/'+gpio+'/direction'
-                    # print(cmd)
-
-                    # os.popen('./riavvio.sh test2').read()
-                    # os.system('./riavvio.sh test2')
-
-                    # os.lseek(fd, offset, os.SEEK_SET)
-                    # return 1
 
 
             elif value[0] == 1:
-
                 pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
                 basename = os.path.basename(last_path[0])
                 basename = '/' + basename
-                if __debug__:
-                    # print('Debug OFF')
-                    pass
-                else:
-                    print('Debug ON')
-                    print("\n\n\npathmod:", pathmod, "basename:", basename, "\n\n\n")
                 gpio = os.path.dirname(pathmod)
 
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
+                    print("\npathmod:", pathmod, "basename:", basename, "\n\n\n")
+
+
+                if __debug__:
+                    pass
+                else:
                     print("gpio:", gpio)
 
                 valueprecedente = os.popen('cat /sys/class/gpio/' + gpio + '/value').read()
                 valueprecedente = valueprecedente.strip('\n')
 
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
                     print("value precedente: ", valueprecedente)
 
                 valoredirezione = os.popen('cat /sys/class/gpio/' + gpio + '/direction').read()
@@ -847,14 +823,10 @@ class Operations(pyfuse3.Operations):
 
                 if valoredirezione == 'out':
                     if gpiobyte == '1' or gpiobyte == '0':
-                        # print("qui", valoredirezione)
                         gpioint = int(gpiobyte)
-                        # gpio = str(gpioint)
                         if __debug__:
-                            # print('Debug OFF')
                             pass
                         else:
-                            print('Debug ON')
                             print("caso value:")
                             print("valore direzione: ", valoredirezione)
 
@@ -864,10 +836,8 @@ class Operations(pyfuse3.Operations):
                     else:
                         print("\n-bash: echo: write error: Invalid argument1")
                         if __debug__:
-                            # print('Debug OFF')
                             pass
                         else:
-                            print('Debug ON')
                             print("errore carattere")
 
                         proc2 = subprocess.Popen(
@@ -877,118 +847,57 @@ class Operations(pyfuse3.Operations):
                         return 1
 
                 else:
-                    # proc6 = subprocess.Popen(['/bin/echo', ' 0 > /gpio_mnt/sys/class/gpio/gpio1/value'], shell=False, stdout=subprocess.PIPE)
-
-                    # process = subprocess.Popen(['echo 0 > /gpio_mnt/test1/sys/class/gpio/gpio1/value'], shell=True, stdout=subprocess.PIPE, universal_newlines=True)
-                    # process.wait()
-
                     command = 'echo 1 > /gpio_mnt/test1/sys/class/gpio/gpio1/value'
-
-                    # f = open("/gpio_mnt/test1/sys/class/gpio/gpio1/value", "b")
-                    # f = open("/gpio_mnt/test1/sys/class/gpio/gpio1/value", mode='w', encoding='utf-8')
-                    # f.write("1")
-                    # f.close()
-
-                    # result = subprocess.run(['echo', ' 1 > /gpio_mnt/test1/sys/class/gpio/gpio1/value'], stdout=subprocess.PIPE)
-                    command = 'echo 1 > /gpio_mnt/test1/sys/class/gpio/gpio1/value'
-                    # subprocess.call(shlex.split(command), shell=True)
-
-                    # result23 = subprocess.Popen(['/bin/sh', '-c', 'echo', '0', '/gpio_mnt/test1/sys/class/gpio/gpio1/value'])
-                    # res = subprocess.run(["echo", "0", "/gpio_mnt/test1/sys/class/gpio/gpio1/value"], capture_output=True)
-                    # res = subprocess.run("echo 1 > /gpio_mnt/test1/sys/class/gpio/gpio1/value", shell=True, check=True)
-                    # print(res)
-
                     print("\n-bash: echo: write error: Invalid argument2")
+
                     if __debug__:
                         # print('Debug OFF')
                         pass
                     else:
-                        print('Debug ON')
                         print("errore carattere")
 
                     os.lseek(fd, offset, os.SEEK_SET)
                     return 1
 
-                '''
-                elif valoredirezione == 'in':
-                    #scrivi vecchio valore
-                    print("\n-bash: echo: write error: Operation not permitted")
-                    print(valueprecedente)
-                    print(valoredirezione)
-                    print('echo ' + valueprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value')
-                    #proc3 = subprocess.Popen('echo ' + valueprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value', shell=True, stdout=subprocess.PIPE)
-
-                        #process = subprocess.run(['echo',' ' + valueprecedente + '> /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value'], stdout=subprocess.PIPE, universal_newlines=True)
-                        #process = CompletedProcess(args=['echo', ' ' + valueprecedente + '> /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value'], returncode=0, stdout='Even more output\n')
-                        #process = subprocess.Popen(['echo', ' ' + valueprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value'],  shell=True, stdout=subprocess.PIPE)
-
-
-
-
-                    cmd = 'echo ' + valueprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value'
-                    print("cmd:", cmd)
-                    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-                    print(proc.poll())
-                    #print(proc.communicate()[0])
-
-
-
-                    #proc4 = subprocess.Popen('echo ' + valueprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/value', shell=True, stdout=subprocess.PIPE)
-
-                    proc = subprocess.Popen('echo 0 > /gpio_mnt/test1/sys/class/gpio/gpio1/value', shell=True, stdout=subprocess.PIPE)
-                    os.lseek(fd, offset, os.SEEK_SET)
-                    return 1
-
-                '''
-
-
-
 
 
             elif active[0] == 1:
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
                     print("caso active:")
 
                 pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
                 basename = os.path.basename(last_path[0])
                 basename = '/' + basename
-                if __debug__:
-                    # print('Debug OFF')
-                    pass
-                else:
-                    print('Debug ON')
-                    print("\npathmod:", pathmod, "basename:", basename, "\n")
                 gpio = os.path.dirname(pathmod)
+
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
-                    print("gpio:", gpio)
+                    print("\npathmod:", pathmod, "basename:", basename, "\n")
+                    print("\ngpio:", gpio)
+
+
                 activeprecedente = os.popen('cat /sys/class/gpio/' + gpio + '/active_low').read()
                 activeprecedente = activeprecedente.strip('\n')
+
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
                     print("active precedente: ", activeprecedente)
+
 
                 if gpiobyte == '0' or gpiobyte == '1':
                     os.lseek(fd, offset, os.SEEK_SET)
                     return os.write(fd, buf)
                 else:
                     print("\n-bash: echo: write error: Invalid argument")
+
                     if __debug__:
-                        # print('Debug OFF')
                         pass
                     else:
-                        print('Debug ON')
-                        print("errore")
+                        print("errore carattere")
 
                     proc2 = subprocess.Popen(
                         'echo ' + activeprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/active_low',
@@ -1001,8 +910,6 @@ class Operations(pyfuse3.Operations):
 
 
             elif edge[0] == 1:
-                # none, rising e falling vanno bene
-                #print("caso edge:")
                 pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
                 basename = os.path.basename(last_path[0])
                 basename = '/' + basename
@@ -1011,7 +918,6 @@ class Operations(pyfuse3.Operations):
 
                 edgeprecedente = os.popen('cat /sys/class/gpio/' + gpio + '/edge').read()
                 edgeprecedente = edgeprecedente.strip('\n')
-
 
 
                 if gpiobyte == 'falling' or gpiobyte == 'rising' or gpiobyte == 'none':
@@ -1030,13 +936,30 @@ class Operations(pyfuse3.Operations):
 
             else:
                 if __debug__:
-                    # print('Debug OFF')
                     pass
                 else:
-                    print('Debug ON')
                     print("errore2")
                 os.lseek(fd, offset, os.SEEK_SET)
                 return 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################################################################
+
+
+
+
+
 
 
 
