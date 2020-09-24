@@ -27,7 +27,7 @@ else
 fi
 
 
-pass="examplenuovo.py"
+pass="example.py"
 echo $pass
 
 echo "restarting filesystem "$nome"!"
