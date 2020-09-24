@@ -71,13 +71,13 @@ class Operations(pyfuse3.Operations):
 
     def _add_path(self, inode, path):
 
-        ultimopath.clear()
-        ultimopath.insert(0, path)
+        last_path.clear()
+        last_path.insert(0, path)
 
         if __debug__:
             pass
         else:
-            print("\nultimopath: ", ultimopath, "\n")
+            print("\nlast_path: ", last_path, "\n")
             print("\npath: ", path)
             print("la lista di gpio disponibili per test2 è: ", listgpio, "\n")
 
@@ -713,8 +713,8 @@ class Operations(pyfuse3.Operations):
                     print('Debug ON')
                     print("caso direction:")
 
-                pathmod = os.path.relpath(ultimopath[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                basename = os.path.basename(ultimopath[0])
+                pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
+                basename = os.path.basename(last_path[0])
                 basename = '/' + basename
 
                 if __debug__:
@@ -789,8 +789,8 @@ class Operations(pyfuse3.Operations):
                     return 1
 
                     '''
-                    pathmod = os.path.relpath(ultimopath[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                    basename = os.path.basename(ultimopath[0])
+                    pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
+                    basename = os.path.basename(last_path[0])
                     basename = '/' + basename
                     print("\n\n\npathmod:", pathmod, "basename:", basename, "\n\n\n")
                     gpio = os.path.dirname(pathmod)
@@ -814,8 +814,8 @@ class Operations(pyfuse3.Operations):
 
             elif value[0] == 1:
 
-                pathmod = os.path.relpath(ultimopath[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                basename = os.path.basename(ultimopath[0])
+                pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
+                basename = os.path.basename(last_path[0])
                 basename = '/' + basename
                 if __debug__:
                     # print('Debug OFF')
@@ -953,8 +953,8 @@ class Operations(pyfuse3.Operations):
                     print('Debug ON')
                     print("caso active:")
 
-                pathmod = os.path.relpath(ultimopath[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                basename = os.path.basename(ultimopath[0])
+                pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
+                basename = os.path.basename(last_path[0])
                 basename = '/' + basename
                 if __debug__:
                     # print('Debug OFF')
@@ -1003,8 +1003,8 @@ class Operations(pyfuse3.Operations):
             elif edge[0] == 1:
                 # none, rising e falling vanno bene
                 #print("caso edge:")
-                pathmod = os.path.relpath(ultimopath[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
-                basename = os.path.basename(ultimopath[0])
+                pathmod = os.path.relpath(last_path[0], '/sys/devices/platform/soc/3f200000.gpio/gpiochip0/gpio/')
+                basename = os.path.basename(last_path[0])
                 basename = '/' + basename
 
                 gpio = os.path.dirname(pathmod)
@@ -1202,7 +1202,7 @@ if __name__ == '__main__':
     edge = [0]
     edge.clear()
 
-    ultimopath = ['']
-    ultimopath.clear()
+    last_path = ['']
+    last_path.clear()
 
     main()
