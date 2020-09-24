@@ -1086,7 +1086,7 @@ class Operations(pyfuse3.Operations):
                     os.lseek(fd, offset, os.SEEK_SET)
                     return os.write(fd, buf)
                 else:
-                    print("-bash: echo: write error: Invalid argument")
+                    print("\n-bash: echo: write error: Invalid argument")
                     proc4 = subprocess.Popen(
                         'echo ' + edgeprecedente + ' > /gpio_mnt/' + nomecontainer + '/sys/class/gpio/' + gpio + '/edge',
                         shell=True, stdout=subprocess.PIPE)
