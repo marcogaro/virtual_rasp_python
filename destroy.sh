@@ -8,7 +8,7 @@ elif [ "$#" -eq 0 ] ; then
 	read -r b
 	nome=$b ;	
 else
-   	echo "error" 
+   	echo "error: missing mandatory name" 
    	exit
 fi
 
