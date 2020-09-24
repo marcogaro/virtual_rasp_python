@@ -24,7 +24,7 @@ else
 	exit;
 fi
    
-pass="examplenuovo.py"
+pass="example.py"
 
 echo "$nome"
 echo "$pass"
@@ -36,7 +36,7 @@ echo "result: " $result
  
 if [ $result -eq 0  ]; then
 	echo "virtual rasp already exists";
-	./destroynuovo.sh $nome;
+	./destroy.sh $nome;
 else 
 	echo "virtual rasp doesn't exist"; 
 fi
