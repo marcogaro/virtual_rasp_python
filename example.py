@@ -1248,9 +1248,9 @@ if __name__ == '__main__':
     listgpio2 = []
 
     if nomeconfigparser == 1:
-        for count in range(1, 27):
-            # print(count, "gpio" + str(count))
-            # print(config[nomecontainer]['gpio' + str(count)])
+        for count in range(0, 27):
+            print(count, "gpio" + str(count))
+            print(config[nomecontainer]['gpio' + str(count)])
             if config[nomecontainer]['gpio' + str(count)] == 'yes':
                 # print(count, "gpio" + str(count), "ok")
                 listgpio.append("gpio" + str(count))
