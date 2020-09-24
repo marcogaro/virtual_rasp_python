@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+#rising e falling
+
+
 '''
 --> versione 3.5
 
