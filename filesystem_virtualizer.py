@@ -1081,7 +1081,7 @@ if __name__ == '__main__':
 
     config = configparser.ConfigParser()
     config.sections()
-    config.read('example.ini')
+    config.read('virtual_rasp.ini')
     config.sections()
 
     nomeconfigparser = 0
