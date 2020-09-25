@@ -13,18 +13,18 @@ else
 fi
    
    
-grep -w $nome example.ini
+grep -w $nome virtual_rasp.ini
 result=$?
 echo "result: " $result 
  
 if [ $result -eq 0  ]; then
-	echo "name in example.ini";
+	echo "name in virtual_rasp.ini";
 else 
-	echo "missing name in example.ini"; 
+	echo "missing name in virtual_rasp.ini"; 
 	exit;
 fi
    
-pass="example.py"
+pass="filesystem_virtualizer.py"
 
 echo "$nome"
 echo "$pass"
