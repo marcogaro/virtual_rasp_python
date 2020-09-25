@@ -1,19 +1,4 @@
 #!/usr/bin/env python3
-
-# rising e falling
-
-
-'''
---> versione 3.5
-
-passthroughfs.py - Example file system for pyfuse3
-This file system mirrors the contents of a specified directory tree.
-Caveats:
- * Inode generation numbers are not passed through but set to zero.
- * Block size (st_blksize) and number of allocated blocks (st_blocks) are not
-   pa
-'''
-
 import os
 import sys
 import configparser
@@ -21,8 +6,6 @@ import re
 import subprocess
 import shlex
 
-# If we are running from the pyfuse3 source directory, try
-# to load the module from there first.
 basedir = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 if (os.path.exists(os.path.join(basedir, 'setup.py')) and
         os.path.exists(os.path.join(basedir, 'src', 'pyfuse3.pyx'))):
@@ -45,24 +28,14 @@ faulthandler.enable()
 log = logging.getLogger(__name__)
 
 
-
-
-
-
-
 ###########################################################################
-
-
 glob_export = 0
 glob_unexport = 0
 glob_direction = 0
 glob_value = 0
 glob_active = 0
 glob_edge = 0
-
 glob_lastpath = ''
-
-
 
 def set_export_to_one():
     global glob_export    # Needed to modify global copy of globvar
@@ -74,7 +47,6 @@ def set_export_to_zero():
 
 def print_glob_export():
     print(glob_export)     # No need for global declaration to read value of globvar
-
 
 
 
@@ -104,7 +76,6 @@ def print_glob_direction():
 
 
 
-
 def set_value_to_one():
     global glob_value    # Needed to modify global copy of globvar
     glob_value = 1
@@ -118,8 +89,6 @@ def print_glob_value():
 
 
 
-
-
 def set_active_to_one():
     global glob_active    # Needed to modify global copy of globvar
     glob_active = 1
@@ -130,7 +99,6 @@ def set_active_to_zero():
 
 def print_glob_active():
     print(glob_active)     # No need for global declaration to read value of globvar
-
 
 
 
@@ -148,8 +116,6 @@ def print_glob_edge():
 
 
 
-
-
 def set_lastpath_to_zero(path):
     global glob_lastpath  # Needed to modify global copy of globvar
     glob_lastpath = path
@@ -158,13 +124,7 @@ def print_glob_lastpath():
     print(glob_lastpath)  # No need for global declaration to read value of globvar
 
 
-
-
-#######à
-
-
-
-
+#########################
 
 
 
@@ -221,13 +181,6 @@ class Operations(pyfuse3.Operations):
             set_export_to_one()
             set_unexport_to_zero()
 
-            '''
-            export.clear()
-            export.insert(0, 1)
-            unexport.clear()
-            unexport.insert(0, 0)
-            '''
-
             if inode not in self._inode_path_map:
                 self._inode_path_map[inode] = path
                 return
@@ -243,13 +196,7 @@ class Operations(pyfuse3.Operations):
         elif path == '/sys/class/gpio/unexport':
             set_export_to_zero()
             set_unexport_to_one()
-            '''
-            export.clear()
-            export.insert(0, 0)
-            unexport.clear()
-            unexport.insert(0, 1)
-            '''
-
+      
             if inode not in self._inode_path_map:
                 self._inode_path_map[inode] = path
                 return
@@ -265,13 +212,6 @@ class Operations(pyfuse3.Operations):
         else:
             set_export_to_zero()
             set_unexport_to_zero()
-            '''
-            export.clear()
-            export.insert(0, 0)
-            unexport.clear()
-            unexport.insert(0, 0)
-            '''
-
             x = re.search("gpio\d{1,2}", path)
 
             if __debug__:
@@ -294,58 +234,26 @@ class Operations(pyfuse3.Operations):
 
                 if path.endswith('active_low'):
                     set_active_to_one()
-                    '''
-                    active.clear()
-                    active.insert(0, 1)
-                    '''
                 else:
                     set_active_to_zero()
-                    '''
-                    active.clear()
-                    active.insert(0, 0)
-                    '''
-
+                    
                 if path.endswith('direction'):
                     set_direction_to_one()
-                    '''
-                    direction.clear()
-                    direction.insert(0, 1)
-                    '''
                 else:
                     set_direction_to_zero()
-                    '''
-                    direction.clear()
-                    direction.insert(0, 0)
-                    '''
 
                 if path.endswith('edge'):
                     set_edge_to_one()
-                    '''
-                    edge.clear()
-                    edge.insert(0, 1)
-                    '''
                 else:
                     set_edge_to_zero()
-                    '''
-                    edge.clear()
-                    edge.insert(0, 0)
-                    '''
 
                 if path.endswith('value'):
                     set_value_to_one()
-                    '''
-                    value.clear()
-                    value.insert(0, 1)
-                    '''
                 else:
                     set_value_to_zero()
-                    '''
-                    value.clear()
-                    value.insert(0, 0)
-                    '''
 
 
-                # bisogna fare i controlli
+                # controlli
                 if gpio in listgpio:
                     if inode not in self._inode_path_map:
                         self._inode_path_map[inode] = path
@@ -372,7 +280,7 @@ class Operations(pyfuse3.Operations):
                     print("\npath:", path)
                     print("No match\n")
 
-                # posso copiare tutto
+                # copio tutto
                 if inode not in self._inode_path_map:
                     self._inode_path_map[inode] = path
                     return
